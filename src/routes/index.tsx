@@ -1,29 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import OliReminder from "@/components/OliReminder.jsx";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Oli Reminder — Pengingat Ganti Oli Motor" },
+      {
+        name: "description",
+        content:
+          "Aplikasi pengingat ganti oli motor berbasis riset tribologi. Pantau jadwal, KM, dan riwayat servis motor matic, bebek, dan sport.",
+      },
+      { property: "og:title", content: "Oli Reminder — Pengingat Ganti Oli Motor" },
+      {
+        property: "og:description",
+        content:
+          "Pantau jadwal ganti oli motormu. Data tersimpan lokal di browser, tanpa akun.",
+      },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  // OliReminder uses IndexedDB & Notification API — render only on client.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+  return <OliReminder />;
 }
