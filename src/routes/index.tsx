@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+// @ts-expect-error - JSX component without types
 import OliReminder from "@/components/OliReminder.jsx";
 
 export const Route = createFileRoute("/")({
